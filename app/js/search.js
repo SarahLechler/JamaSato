@@ -3,10 +3,10 @@ var exports = module.exports = {};
 /**
  *@return
  */
-export.basicsearch = function (JSson, searchinput)
+exports.search = function (JSon, searchinput)
 {
 
-  var Jsonobject = JSON.pase(JSon)
+  var Jsonobject = JSON.parse(JSon);
     if (searchinput[0] != null && searchinput[1] == null && searchinput[2] == null)
     {
      return  _searchname(Jsonobject, searchinput[0]); //Name
@@ -29,7 +29,7 @@ export.basicsearch = function (JSson, searchinput)
 
     else  if (searchinput[0] != null && searchinput[1] == null && searchinput[2] != null)
     {
-     return  (_searchname(Jsonobject, searchinput[0]) &&  && _searchbox(Jsonobject, searchinput[2])); //Name + Box
+     return  (_searchname(Jsonobject, searchinput[0]) &&  _searchbox(Jsonobject, searchinput[2])); //Name + Box
     }
 
     else  if (searchinput[0] == null && searchinput[1] != null && searchinput[2] != null)
@@ -48,46 +48,31 @@ export.basicsearch = function (JSson, searchinput)
     }
 }
 
-function _searchname(Json, searchname)
+function _searchname(Json, name)
  {
-    return Json.description.contains(this.searchname)
+    return Json.description.contains(name);
 }
 
-function _searchdatum(Json, searchdate) {
-    if (_stringtoDate(Json.DATATAKE_1_DATATAKE_SENSING_START.substring(0, 10), "YYYY/mm/dd", "-").parse() == this.searchdate.parse()) {
+function _searchdatum(Json, date)
+ {
+    if (_stringToDate(Json.DATATAKE_1_DATATAKE_SENSING_START.substring(0, 10), "yyyy/mm/dd", "-").parse() == date.parse())
+    {
         return true;
     }
 }
 
 /**
  *https://github.com/tmpvar/polygon.js
- *npm install polygon die node.js libary für polygone
+ *npm install polygon, die node.js libary für polygone
  *Copyright (c) <2017> <tmpvar>
  */
 function _searchbox(Json, box)
 {
 
-    var such = new Polygon([
-      Vec2(box[0,0] box[0,1]),
-      Vec2(box[1,0] box[1,1]),
-      Vec2(box[2,0] box[2,1]),
-      Vec2(box[3,0] box[3,1])
-    ]);
-
+    var such = new Polygon(box);
     var punkte = Json.FOOTPRINT;
-    var current = new Polygon( punkte);
-
-    if(current.union(such).toArray[0,0] != null)
-    {
-      return true;
-    }
-
-    else
-   {
-    return false;
-  }
-
-    ])
+    var current = new Polygon(punkte);
+    return current.union(such).toArray[0,0] != null;
 
 }
 
