@@ -3,49 +3,84 @@ var exports = module.exports = {};
 /**
  *@return
  */
-exports.search = function (JSon, searchinput)
+exports.search = function (input) {
+    var mainFolderPath = "C:\\Users\\Emma\\Documents\\Uni\\WiSe17\\Geosoftware2\\exampleData";
+    var i = 0;
+    var liste = [];
+    var erg = [];
+    switch(_tofind(input))
+    {
+        case 1:
+        while(i < liste.length-1)
+        {
+            if(_searchname(JSON.parse(liste[i]), input[0])
+            {
+                erg.push(liste[i]);
+            }
+            i++;
+        }
+        break;
+
+        case 2:
+
+        break;
+
+        case 3:
+
+        break;
+
+        case 4:
+
+        break;
+
+        case 5:
+
+        break;
+
+        case 6:
+
+        break;
+
+        case 7:
+
+        break;
+
+        default:
+
+    }
+}
+function _tofind(searchinput)
 {
+       if (searchinput[0] != null && searchinput[1] == null && searchinput[2] == null) {
+           return 1 //Name
+       }
 
-  var Jsonobject = JSON.parse(JSon);
-    if (searchinput[0] != null && searchinput[1] == null && searchinput[2] == null)
-    {
-     return  _searchname(Jsonobject, searchinput[0]); //Name
-    }
+       else if (searchinput[0] != null && searchinput[1] != null && searchinput[2] != null) {
+           return 2 //Datum
+       }
 
-    else  if (searchinput[0] != null && searchinput[1] != null && searchinput[2] != null)
-    {
-     return  ( _searchdatum(Jsonobject, searchinput[1])); //Datum
-    }
+       else if (searchinput[0] == null && searchinput[1] != null && searchinput[2] != null) {
+           return 3; //Box
+       }
 
-    else  if (searchinput[0] == null && searchinput[1] != null && searchinput[2] != null)
-    {
-     return  (_searchbox(Jsonobject, searchinput[2])); //Box
-    }
+       else if (searchinput[0] != null && searchinput[1] != null && searchinput[2] == null) {
+           return 4; // Name + Datum
+       }
 
-    else  if (searchinput[0] != null && searchinput[1] != null && searchinput[2] == null)
-    {
-     return  (_searchname(Jsonobject, searchinput[0]) &&  _searchdatum(Jsonobject, searchinput[1])); // Name + Datum
-    }
+       else if (searchinput[0] != null && searchinput[1] == null && searchinput[2] != null) {
+           return 5; //Name + Box
+       }
 
-    else  if (searchinput[0] != null && searchinput[1] == null && searchinput[2] != null)
-    {
-     return  (_searchname(Jsonobject, searchinput[0]) &&  _searchbox(Jsonobject, searchinput[2])); //Name + Box
-    }
+       else if (searchinput[0] == null && searchinput[1] != null && searchinput[2] != null) {
+           return 6; // Datum + Box
+       }
 
-    else  if (searchinput[0] == null && searchinput[1] != null && searchinput[2] != null)
-    {
-     return  ( _searchdatum(Jsonobject, searchinput[1]) && _searchbox(Jsonobject, searchinput[2])); // Datum + Box
-    }
+       else if (searchinput[0] != null && searchinput[1] != null && searchinput[2] != null) {
+           return 7; //Name + Datum + Box
+       }
 
-    else  if (searchinput[0] != null && searchinput[1] != null && searchinput[2] != null)
-    {
-     return  (_searchname(Jsonobject, searchinput[0]) &&  _searchdatum(Jsonobject, searchinput[1]) && _searchbox(Jsonobject, searchinput[2])); //Name + Datum + Box
-    }
 
-    else
-    {
-      throw 'No given data';
-    }
+
 }
 
 function _searchname(Json, name)
