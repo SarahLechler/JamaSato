@@ -55,7 +55,7 @@ function _searchname(Json, name)
 
 function _searchdatum(Json, date)
  {
-    if (_stringToDate(Json.DATATAKE_1_DATATAKE_SENSING_START.substring(0, 10), "yyyy/mm/dd", "-").parse() == date.parse())
+    if (_stringToDate(Json.DATATAKE_1_DATATAKE_SENSING_START.substring(0, 10), "yyyy/mm/dd", "-").getTime == date.getTime())
     {
         return true;
     }
