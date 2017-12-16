@@ -3,7 +3,8 @@ var exports = module.exports = {};
 /**
  *@return
  */
-exports.search = function (input) {
+exports.search = function (input)
+{
     var mainFolderPath = "C:\\Users\\Emma\\Documents\\Uni\\WiSe17\\Geosoftware2\\exampleData";
     var i = 0;
     var liste = [];
@@ -11,43 +12,111 @@ exports.search = function (input) {
     switch(_tofind(input))
     {
         case 1:
-        while(i < liste.length-1)
-        {
-            if(_searchname(JSON.parse(liste[i]), input[0])
+            while(i < liste.length-1)
             {
-                erg.push(liste[i]);
-            }
-            i++;
-        }
+                if(_searchname(JSON.parse(liste[i]), input[0]))
+                {
+                     erg.push(liste[i]);
+                }
+                 i++;
+             }
+
         break;
 
         case 2:
+            while(i < liste.length-1)
+            {
+                if(_searchdatum(JSON.parse(liste[i]), input[1]))
+                {
+                    erg.push(liste[i]);
+                }
+                i++;
+            }
 
         break;
 
         case 3:
+            while(i < liste.length-1)
+            {
+                if(_searchbox(JSON.parse(liste[i]), input[2]))
+                {
+                    erg.push(liste[i]);
+                }
+                i++;
+            }
 
         break;
 
         case 4:
+            while(i < liste.length-1)
+            {
+                if(_searchname(JSON.parse(liste[i]), input[0]))
+                {
+                    if(_searchdatum(JSON.parse(liste[i]), input[1]))
+                    {
+                        erg.push(liste[i]);
+                    }
+                }
+                i++;
+            }
 
         break;
 
         case 5:
+            while(i < liste.length-1)
+            {
+                if(_searchname(JSON.parse(liste[i]), input[0]))
+                {
+                    if(_searchbox(JSON.parse(liste[i]), input[2]))
+                    {
+                        erg.push(liste[i]);
+                    }
+                }
+                i++;
+            }
 
         break;
 
         case 6:
 
+            while(i < liste.length-1)
+            {
+                if(_searchdatum(JSON.parse(liste[i]), input[1]))
+                {
+                    if(_searchbox(JSON.parse(liste[i]), input[2]))
+                    {
+                        erg.push(liste[i]);
+                    }
+                }
+                i++;
+            }
+
         break;
 
         case 7:
+            while(i < liste.length-1)
+            {
+                if(_searchname(JSON.parse(liste[i]), input[0]))
+                {
+                    if(_searchdatum(JSON.parse(liste[i]), input[1]))
+                    {
+                        if(_searchbox(JSON.parse(liste[i]), input[2]))
+                        erg.push(liste[i]);
+                    }
+                }
+                i++;
+            }
 
         break;
 
         default:
 
+
     }
+
+    return erg;
+
+
 }
 function _tofind(searchinput)
 {
