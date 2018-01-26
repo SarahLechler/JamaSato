@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0;" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./Beispiel:SELFHTML-Beispiel-Grundlayout.css" />
+    <style>
+
+        body {
+            font-family: Avenir, sans-serif;
+        }
+
+        main {
+            position: relative;
+        }
+        .overlay  {
+            border-radius: 0 .5em .5em;
+            border: 1px solid;
+            padding: .5em;
+            margin: .5em;
+        }
+        button {
+            padding: .5em 1em;
+            margin: .5em;
+            font-size: 1em;
+            background: #666;
+            border: 1px solid #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        .overlayHidden {
+            display: none;
+        }
+
+        .overlay {
+            width: 20em;
+            background: #fffbf0;
+            border: 1px solid #e7c157;
+            position: absolute;
+            top: 10%;
+            right: 30%;
+            margin: auto;
+            padding: 1em;
+        }
+
+        #schließen {
+            position: absolute;
+            margin: 0;
+            right: 0;
+            top: 0;
+            background: #c32e04;
+            color: white;
+            font: bold 0/0 sans-serif;
+        }
+
+        #schließen::before {
+            content: "X";
+            font: bold 1rem sans-serif;
+        }
+
+    </style>
+    <title>Beispiel: inlinePopup mit ClassName</title>
+</head>
+<body>
+<h1>Beispiel: inlinePopup mit ClassName</h1>
+
+<main>
+    <div id="popup" class="overlayHidden">
+        <h2>Sentinal 2 measurements</h2>
+        <form method="post">
+            <p><b id='info'></b></p>
+        </form>
+        <button id="schließen">schließen</button>
+    </div>
+</main>
+
+<script>
+
+    var startBtn = document.getElementById('start'),
+        SchließenBtn = document.getElementById('schließen');
+    popup = document.getElementById('popup');
+
+    startBtn.addEventListener('click',getcoordinats());
+    SchließenBtn.addEventListener('click',hideWindow);
+
+
+    function showWindow(searcherg) {
+        popup.className = 'overlay';
+        document.getElementById('info').innerHTML= searcherg.date + "\n" + searcherg.alles.metadata[''].CLOUD_COVERAGE_ASSESSMENT;
+    }
+
+    function hideWindow(){
+        popup.className = 'overlayHidden';
+    }
+function searchsth(coordinate)
+    {
+        var arrayliste = ['','','',coordinate];
+            $.ajax({
+                // catch custom response code.
+                statusCode: {
+                    500: function () {
+                        console.error("Object not found");
+                    }
+                },
+                data: arrayliste,
+                type: 'GET',
+                contentType: "application/json",
+                // Dynamically create Request URL by appending requested name to /api prefix
+                url: '/search',
+                error: function (xhr, status, err) {
+                    console.log(err);
+                },
+                success: function (res) {
+                    showWindow(res)
+                }
+            });
+    }
+        function getcoordinats()
+        {
+            var lat, lng;
+
+            map.addEventListener('click ', function (ev) {
+                lat = ev.latlng.lat;
+                lng = ev.latlng.lng;
+                var liste = [lat,lng,lat+0.001,lng,lat+0.001,lng+0.001,lat,lng+0.001];
+                searchsth(liste);
+            });
+
+
+        }
+
+</script>
+</body>
+</html>

@@ -263,6 +263,7 @@ function _polygonstringtoarray1(footprint)
 
 function _polygonstringtoarray2(box)
 {
+    console.log(box);
         box = box.substring(1,box.length-1);
         var boxliste = box.split(",");
         var boxes =new Array(4);
