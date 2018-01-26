@@ -90,15 +90,15 @@
             <table id="example" class="display" width="100%" cellspacing="0">
                 <thead>
                 <tr>
-                    <th>name</th>
                     <th>date</th>
+                    <th>name</th>
                     <th>location</th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>name</th>
                     <th>date</th>
+                    <th>name</th>
                     <th>location</th>
                 </tr>
                 </tfoot>
@@ -110,24 +110,25 @@
             <h1 class="sidebar-header">Layer Manipulation<span class="sidebar-close"><i
                     class="fa fa-caret-left"></i></span></h1>
             <div>
-                <h2>Set Opacity</h2>
+                <h3>Set Opacity</h3>
                 <div class="opacitySlidecontainer">
                     <input type="range" min="1" max="100" value="0" class="slider" id="opacityslider"
                            onchange="changeOpacity()">
                 </div>
             </div>
             <div>
-                <h2>Set Brightness</h2>
+                <h3>Set Brightness</h3>
                 <div class="brightnessSlidecontainer">
                     <input type="range" min="0" max="255" value="0" class="slider" id="brightnessslider">
                 </div>
             </div>
             <div>
-                <h2>Choose Bands</h2>
+                <h3>Choose Bands</h3>
                 <div>
-                    <form action="/chooseBands" method="post">
+                    <p>To change the color brightness of the different bands enter a value between 0 and 255</p>
+                    <form id = "bandform" action="/chooseBands" method="get">
                         <label for="red">Red</label>
-                        <select id="red" name="red" onchange="loadBandRed()">
+                        <select id="red" name="red">
                             <option value="B01">Band 1</option>
                             <option value="B02">Band 2</option>
                             <option value="B03">Band 3</option>
@@ -140,9 +141,10 @@
                             <option value="B10">Band 10</option>
                             <option value="B11">Band 11</option>
                             <option value="B12">Band 12</option>
-                        </select></br>
+                        </select>
+                        <input type="number" min="0" max="255" id="redvalue" name="redvalue" value="0"></br>
                         <label for="green">Green</label>
-                        <select id="green" name="green" onchange="loadBandRed()">
+                        <select id="green" name="green">
                             <option value="B01">Band 1</option>
                             <option value="B02">Band 2</option>
                             <option value="B03">Band 3</option>
@@ -155,9 +157,10 @@
                             <option value="B10">Band 10</option>
                             <option value="B11">Band 11</option>
                             <option value="B12">Band 12</option>
-                        </select></br>
+                        </select>
+                        <input type="number" min="0" max="255" id="greenvalue" name="greenvalue" value="0"></br>
                         <label for="blue">Blue</label>
-                        <select id="blue" name="blue" onchange="loadBandRed()">
+                        <select id="blue" name="blue">
                             <option value="B01">Band 1</option>
                             <option value="B02">Band 2</option>
                             <option value="B03">Band 3</option>
@@ -170,9 +173,13 @@
                             <option value="B10">Band 10</option>
                             <option value="B11">Band 11</option>
                             <option value="B12">Band 12</option>
+
+                        </select>
+                        <input type="number" min="0" max="255" id="bluevalue" name="bluevalue" value="0"></br>
+                        <input type="checkbox" id="gray" name="graysacle" value="grayscale">
+                        <label for="gray"> grayscale</label>
+                        <input type="hidden" id="dir" name="dir" value=""> <br>
                         </select></br>
-                        <input type="checkbox" id="gray" name="graysacyl" value="Grayscayl">
-                        <label for="gray"> grayscayl</label>
                         <button type="submit">Submit</button>
                     </form>
                 </div>

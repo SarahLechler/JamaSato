@@ -1,27 +1,33 @@
 var searchdata;
 
-
+/*function tableDestroy(table){
+    table.destroy();
+} */
 function tableButton(res) {
+    res = JSON.stringify(res);
+    res = JSON.parse(res);
+    console.log(res);
+
     $('#example').DataTable({
         searching: false,
         scrollX: true,
-        "data": "res",
-        "columns": [
-            {"data": "name"},
-            {"data": "date"},
-            {"data": "location"}
-        ]
+        data: res,
+        destroy: true,
+        columns: [
+            {data: 'date'},
+            {data: 'name'},
+            {data: 'location'}
+        ],
+        "order": [[1, "desc"]]
     });
+
     $('#example').on('click', 'tr', function () {
-        var datastring = this.outerText;
-        var croppedData = datastring.substring(0, datastring.indexOf('.SAFE'));
-        croppedData = croppedData + '.SAFE';
-        layertomap(croppedData);
+        var datastring = this.children[1].innerText;
+        layertomap(datastring);
     });
 }
 
-function layertomap(croppedData) {
-    var pathbase = './layer/' + croppedData;
-
-    console.log(pathbase);
+function layertomap(datastring) {
+    var pathbase = '/home/s_lech05/JamaSato/IMG/' + datastring;
+    $('#dir')[0].value = pathbase;
 }
