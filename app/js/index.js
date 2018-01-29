@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function() {
   /**
    * @desc AJAX.GET to overwrite submit of the searchform.
@@ -97,3 +94,4 @@ $(document).ready(function() {
     }});
 
 });
+

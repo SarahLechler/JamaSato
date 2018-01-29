@@ -1,26 +1,27 @@
 var searchdata;
+
 function tableButton(res) {
 
 
-    $('#example').DataTable({
+    $('#example').DataTable({ //Initializing DataTable (framework)
         searching: false,
-        scrollX: true,
-        data: res,
-        destroy: true,
+        scrollX: true,      // enable List scorolling to fit the sidebar
+        data: res,          // searching through given data (res) by column and strings
+        destroy: true,      // delete initialized table to enable reinitialization for a new search query
         columns: [
             {data: 'date'},
             {data: 'name'},
             {data: 'location'}
         ],
-        "order": [[1, "desc"]]
+        "order": [[1, "desc"]]      // Ordering by date
     });
+    addPreview(res);        //Adding the footprint of all search results to the map
 
-    addPreview(res);
 
     $('#example').on('click', 'tr', function () {
         var table = $('#example').DataTable();
         var datastring = this.children[1].innerText;
-        if ( $(this).hasClass('selected') ) {
+        if ( $(this).hasClass('selected') ) {   //Selection highlighting of one dataset in the table
             $(this).removeClass('selected');
         }
         else {
@@ -32,6 +33,7 @@ function tableButton(res) {
         $('#dir')[0].value = pathbase;
     });
 }
+
 
 function layertomap(res) {
     var layerpath = res;
