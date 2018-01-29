@@ -238,7 +238,7 @@ function _searchdatum(Json, d1, d2)
 var Polygon = require('polygon');
 
 /**
- *
+ * Need for LF00020
  * @param footprint = the current FOOTPRINT
  * @returns {a Array with the coordinats of the FOOTPINT}
  * @private
@@ -261,6 +261,12 @@ function _polygonstringtoarray1(footprint)
 
 }
 
+/**
+ * Need for LF00020
+ * @param box = the string od the bbox
+ * @returns {a array of the bbox}
+ * @private
+ */
 function _polygonstringtoarray2(box)
 {
     console.log(box);
