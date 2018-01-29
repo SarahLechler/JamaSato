@@ -53,13 +53,13 @@
     <div class="sidebar-tabs">
         <ul role="tablist">
             <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            <li><a href="#adLayers" role="tab"><i class="fa fa-map-marker"></i></a></li>
             <li><a href="#manipulation" role="tab"><i class="fa fa-gear"></i></a></li>
-             <li ><a href="#link" role="tab"><i class="fa fa-envelope"></i></a></li>
-            <!-- <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li> -->
+            <li><a href="#link" role="tab"><i class="fa fa-envelope"></i></a></li>
+            <li><a href="#git" role="tab"><i class="fa fa-github"></i></a></li>
         </ul>
 
         <ul role="tablist">
-            <!-- <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li> -->
         </ul>
     </div>
 
@@ -105,29 +105,14 @@
             </table>
         </div>
 
-
-        <div class="sidebar-pane" id="manipulation">
-            <h1 class="sidebar-header">Layer Manipulation<span class="sidebar-close"><i
-                    class="fa fa-caret-left"></i></span></h1>
+        <div class="sidebar-pane" id="adLayers">
+            <h1 class="sidebar-header">Add Layers from chosen Dataset<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
             <div>
-                <h2>Set Opacity</h2>
-                <div class="opacitySlidecontainer">
-                    <input type="range" min="1" max="100" value="0" class="slider" id="opacityslider"
-                           onchange="changeOpacity()">
-                </div>
-            </div>
-            <div>
-                <h2>Set Brightness</h2>
-                <div class="brightnessSlidecontainer">
-                    <input type="range" min="0" max="255" value="0" class="slider" id="brightnessslider">
-                </div>
-            </div>
-            <div>
-                <h2>Choose Bands</h2>
+                <h3>Choose Bands for a RGB image</h3>
                 <div>
-                    <form action="/chooseBands" method="post">
+                    <form id = "bandform" action="/chooseBands" method="post">
                         <label for="red">Red</label>
-                        <select id="red" name="red" onchange="loadBandRed()">
+                        <select id="red" name="red">
                             <option value="B01">Band 1</option>
                             <option value="B02">Band 2</option>
                             <option value="B03">Band 3</option>
@@ -142,7 +127,7 @@
                             <option value="B12">Band 12</option>
                         </select></br>
                         <label for="green">Green</label>
-                        <select id="green" name="green" onchange="loadBandRed()">
+                        <select id="green" name="green">
                             <option value="B01">Band 1</option>
                             <option value="B02">Band 2</option>
                             <option value="B03">Band 3</option>
@@ -157,7 +142,7 @@
                             <option value="B12">Band 12</option>
                         </select></br>
                         <label for="blue">Blue</label>
-                        <select id="blue" name="blue" onchange="loadBandRed()">
+                        <select id="blue" name="blue">
                             <option value="B01">Band 1</option>
                             <option value="B02">Band 2</option>
                             <option value="B03">Band 3</option>
@@ -171,10 +156,6 @@
                             <option value="B11">Band 11</option>
                             <option value="B12">Band 12</option>
                         </select></br>
-                        <input type="hidden" id="dir" name="dir" value=""> <br>
-                        <button type="submit" >Submit</button>
-                      </form>
-                      <form>
                         <h3>Or choose band for a grayscale image</h3>
                         <div>
                         <select id="gray" name="gray">
@@ -191,6 +172,7 @@
                             <option value="B11">Band 11</option>
                             <option value="B12">Band 12</option>
                         </select>
+                        <input type="hidden" id="dir" name="dir" value=""> <br>
                         <button type="submit" onclick="createGrayscale()">Submit</button>
                     </form>
                 </div>
@@ -219,7 +201,7 @@
                         <label for="green">Choose Min and Max values forGreen</label>
                         <input type="number" min="0" max="255" id="greenvaluemin" name="greenvaluemin" value="0">
                         <input type="number" min="0" max="255" id="greenvaluemax" name="greenvaluemax" value="0"></br>
-                        <label for="blue">Choose Min and Max values for Blue</label>>>>>>>> master
+                        <label for="blue">Choose Min and Max values for Blue</label>
                         <input type="number" min="0" max="255" id="bluevaluemin" name="bluevaluemin" value="0">
                         <input type="number" min="0" max="255" id="bluevaluemax" name="bluevaluemax" value="0"></br>
                         <button type="submit">Submit</button>
@@ -228,34 +210,37 @@
             </div>
 
         </div>
-
         <div class="sidebar-pane" id="link">
-            <h1 class="sidebar-header">Share<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-            <div id="Share">
-                <form id="createLink">
-                    <script type="text/javascript">
-                        function Copy()
-                        {
-                            var Url = document.getElementById("paste-box");
-                            Url.value = window.location.href;
-                            Url.focus();
-                            Url.select();
-                            document.execCommand("Copy");
-                        }
-                    </script>
-                    <div>
-                        URL: <textarea id="paste-box" rows="1" cols="30"></textarea>
-                        <button type="submit"  value="Copy Url" onclick="Copy();" >copy URL</button>
-                        <br />
-                    </div>
-                </form>
-            </div>
+              <h1 class="sidebar-header">Share<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+              <div id="Share">
+                  <form id="createLink">
+                      <script type="text/javascript">
+                          function Copy()
+                          {
+                              var Url = document.getElementById("paste-box");
+                              Url.value = window.location.href;
+                              Url.focus();
+                              Url.select();
+                              document.execCommand("Copy");
+                          }
+                      </script>
+                      <div>
+                          URL: <textarea id="paste-box" rows="1" cols="30"></textarea>
+                          <button type="submit"  value="Copy Url" onclick="Copy();" >copy URL</button>
+                          <br />
+                      </div>
+                  </form>
+              </div>
+          </div>
+
+        <div class="sidebar-pane" id="git">
+            <h1 class="sidebar-header">GitHub repository<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            <h3>For feedback or further develoment see our GitHub repository
+               <a href="https://github.com/SarahLechler/JamaSato"> here.</a>
+            </h3>
         </div>
 
 
-        <div class="sidebar-pane" id="settings">
-            <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-        </div>
     </div>
 </div>
 <div id="map" class="sidebar-map"></div>
@@ -265,12 +250,11 @@
 <script src="../js/createtable.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.13/leaflet.draw.js"></script>
 <script src="https://www.promisejs.org/polyfills/promise-7.0.4.min.js"></script>
-<script src="../js/createtable.js"></script>
 <script src="../js/preview.js"></script>
+<script src="../js/createtable.js"></script>
 <script src="../js/leafletembed.js"></script>
 <script src="../js/dataManipulationLeaflet.js"></script>
 <script src="../js/setDate.js"></script>
-<script src="../js/JSONparse.js"></script>
 <script src="../js/index.js"></script>
 
 
