@@ -1,5 +1,5 @@
 var polygonString;
-
+ var polygonLayer = L.featureGroup([])
 var previewStyle = {
     "color": "red",
     "weight": 5
@@ -8,7 +8,9 @@ var previewStyle = {
 //collecting necessary metadata to generate a footprint to display on the map
 
 function addPreview(res) {
-  var polygonLayer = L.featureGroup([])
+  if(map.hasLayer(polygonLayer)){
+    map.removeLayer(polygonLayer)
+  }
     for(var i = 0; i < res.length; i++) {
         if (res[i] !== undefined){
 
@@ -30,11 +32,4 @@ function addPreview(res) {
         var polygon = L.polygon(previewCoords, {color: 'red'})
       polygonLayer.addLayer(polygon);
     }}
-
-    if(map.hasLayer(polygonLayer)){
-      map.removeLayer(polygonLayer)
-      polygonLayer.addTo(map);
-    } else {
-    polygonLayer.addTo(map);
-  }
 };
