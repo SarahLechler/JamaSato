@@ -157,6 +157,10 @@
                             <option value="B11">Band 11</option>
                             <option value="B12">Band 12</option>
                         </select></br>
+                        <input type="hidden" id="dir" name="dir" value=""> <br>
+                        <button type="submit" >Submit</button>
+                      </form>
+                      <form>
                         <h3>Or choose band for a grayscale image</h3>
                         <div>
                         <select id="gray" name="gray">
@@ -173,8 +177,7 @@
                             <option value="B11">Band 11</option>
                             <option value="B12">Band 12</option>
                         </select>
-                        <input type="hidden" id="dir" name="dir" value=""> <br>
-                        <button type="submit">Submit</button>
+                        <button type="submit" onclick="createGrayscale()">Submit</button>
                     </form>
                 </div>
             </div>
