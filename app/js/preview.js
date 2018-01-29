@@ -1,10 +1,11 @@
-
 var polygonString;
 
 var previewStyle = {
     "color": "red",
     "weight": 5
 };
+
+//collecting necessary metadata to generate a footprint to display on the map
 
 function addPreview(res) {
   var polygonLayer = L.featureGroup([])
