@@ -12,15 +12,14 @@ import re
 path = '/opt/sentinel2'
 outputPathBase = '/home/s_lech05/JamaSato/IMG/'
 outputPathBaseList = []
-s2_directories = []
 
 def getImageFolder():
     directories = [x[1] for x in os.walk(path)]
-    non_empty_dirs = [x for x in directories if x]  # filter out empty lists
+    non_empty_dirs = [x for x in directories if x]  # filter out empty directories
     s2_directories = non_empty_dirs[0]
     for s2 in s2_directories:
         outputPathBaseList.append(outputPathBase + s2)
-        os.makedirs(outputPathBase + s2)
+        #os.makedirs(outputPathBase + s2)
     imgFolderList = []
     for folder in s2_directories:
         directorieList = path + '/' + folder + "/GRANULE"
@@ -29,17 +28,33 @@ def getImageFolder():
     return imgFolderList
 
 
-gdalWarpBase = ["gdalwarp", "-of", "GTiff"]
+gdalTranslateBase = ["gdal_translate", "-ot", "byte", "-scale", "0", "4573", "-of", "PNG"]
+
+def runFolderLoop (dirpath, path):
+    for imgInFolder in os.listdir(dirpath):
+        sourcepathInFolder = dirpath + '/' + imgInFolder
+        outputpathInFolder = path + '/' + imgInFolder
+        outputpathInFolder = outputpathInFolder.replace("jp2", "png")
+        gdalgdalTranslate = gdalTranslateBase + [sourcepathInFolder, outputpathInFolder]
+        print(" ".join(gdalgdalTranslate))
+        subprocess.call(gdalgdalTranslate)
+
+
 
 imgFolderList = getImageFolder()
 
 
 for path, imgFolder in zip(outputPathBaseList, imgFolderList):
-    for  img in  os.listdir(imgFolder):
+    for img in os.listdir(imgFolder):
         sourcepath = imgFolder + '/' + img
-        outputpath = path + '/' + img
-        outputpath = outputpath.replace("jp2", "tif")
-        gdalgdalWarp = gdalWarpBase + [sourcepath, outputpath]
-        print(" ".join(gdalgdalWarp))
-        subprocess.call(gdalgdalWarp)
+        if os.path.isdir(sourcepath):
+            runFolderLoop(sourcepath, path)
+        else:
+            outputpath = path + '/' + img
+            outputpath = outputpath.replace("jp2", "png")
+            print(sourcepath)
+            gdalgdalTranslate = gdalTranslateBase + [sourcepath, outputpath]
+            print(" ".join(gdalgdalTranslate))
+            subprocess.call(gdalgdalTranslate)
+
 
